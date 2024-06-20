@@ -1,8 +1,8 @@
-
+import SignUp from "@/components/(auth)/sign-up/SignUp";
 export default function Home() {
   return (
     <>
-      <h1>Hello world</h1>
+     <SignUp authType="sign-in" />
     </>
   );
 }
