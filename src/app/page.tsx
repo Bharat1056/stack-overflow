@@ -1,8 +1,17 @@
-import SignUp from "@/components/(auth)/sign-up/SignUp";
-export default function Home() {
+import HomePage from "@/components/Home/Home";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
+
+export default async function Home() {
+  const supabase = createClient()
+  const { data, error } = await supabase.auth.getUser()
+  if (error || !data?.user) {
+    redirect('/Login')
+  }
+
   return (
     <>
-     <SignUp authType="sign-in" />
+      <HomePage email={data.user.email || ""} />
     </>
   );
 }
