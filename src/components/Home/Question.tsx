@@ -24,7 +24,7 @@ import ShareBtn from "../Utils/ShareBtn"
 import { Toast } from 'primereact/toast';
 
 
-export default function Component() {
+export default function QuestionBox() {
   const [liked, setLiked] = useState(false)
   const [bookmark, setBookmark] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null);

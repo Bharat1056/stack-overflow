@@ -31,3 +31,11 @@ const publishQuestionSchema = z.object({
 
 export type publishQuestionSchemaType = z.infer<typeof publishQuestionSchema>;
 export  { publishQuestionSchema }
+
+const updateQuestionSchema = z.object({
+  question_title: z.string(),
+  question_description: z.string(),
+  tags: z.array(z.string()),
+});
+export type updateQuestionSchemaType = z.infer<typeof updateQuestionSchema>;
+export  { updateQuestionSchema }
