@@ -3,6 +3,8 @@ import React from "react";
 import { publishQuestion } from "../actions/questions/actions"
 import QuestionBox from "@/components/Home/Question";
 import QuestionDetails from "@/components/Home/QuestionDetails";
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
 
 const page = () => {
     // const [loading, setLoading] = React.useState(false)
@@ -25,12 +27,19 @@ const page = () => {
     //     }
     // }
 
+    const editor = useEditor({
+        extensions: [StarterKit],
+        content: '<p>Hello World! 🌎️</p>',
+      })
+
     return (
         // <div className="h-screen flex justify-center items-center">
         //     <button className="text-2xl" onClick={handleSubmit}>{ !loading ? "Click me" : "Loading"}</button>
         // </div>
         <>
-            <QuestionDetails />
+            {/* <QuestionDetails /> */}
+
+            <EditorContent className="h-screen" editor={editor} />
         </>
     )
 }
