@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
@@ -20,12 +20,34 @@ import {
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 import { Copy } from "lucide-react"
-import { WhatsappIcon, WhatsappShareButton, LinkedinIcon, LinkedinShareButton, TwitterIcon, TwitterShareButton } from 'react-share'
+import ShareBtn from "../Utils/ShareBtn"
+import { Toast } from 'primereact/toast';
 
 
 export default function Component() {
   const [liked, setLiked] = useState(false)
   const [bookmark, setBookmark] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null);
+  const toast = useRef<Toast>(null);
+
+  const showSuccess = () => {
+    toast.current?.show({ summary: '', detail: 'Copied to clipboard', life: 500, className: "bg-transparent text-white p-4 rounded" });
+  };
+  const showError = () => {
+    toast.current?.show({ summary: '', detail: 'Error in Copy', life: 500, className: "bg-transparent text-white p-4 rounded" });
+  };
+
+
+  const handleCopy = () => {
+    if (inputRef.current) {
+      const inputValue = inputRef.current.value;
+      navigator.clipboard.writeText(inputValue).then(() => {
+        showSuccess()
+      }).catch(err => {
+        showError()
+      });
+    }
+  };
   return (
     <div className="h-screen flex justify-center items-center">
       <Card className="w-full max-w-3xl">
@@ -61,12 +83,12 @@ export default function Component() {
                 variant="ghost"
                 size="icon"
                 className={`w-4 h-4 ${liked ? "text-primary" : "text-muted-foreground"}`}
-                onClick={() => setLiked(!liked)}
+                onClick={() => setLiked((prev) => !prev)}
               >
                 <ThumbsUpIcon className="w-4 h-4" />
                 <span className="sr-only">Upvote</span>
               </Button>
-              <span>342 votes</span>
+              <span className={` ${liked ? "text-primary" : "text-muted-foreground"}`}>342 votes</span>
             </div>
           </div>
           <div className="flex justify-end text-muted-foreground text-sm">Asked 2 days ago</div>
@@ -88,6 +110,7 @@ export default function Component() {
               <span className="sr-only">Upvote</span>
             </Button>
             <Dialog>
+              <Toast ref={toast} position="top-center" />
               <DialogTrigger asChild>
                 <Button variant="ghost" size="icon">
                   <ShareIcon className="w-4 h-4" />
@@ -95,6 +118,7 @@ export default function Component() {
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
+
                 <DialogHeader>
                   <DialogTitle>Share link</DialogTitle>
                   <DialogDescription>
@@ -110,41 +134,23 @@ export default function Component() {
                       id="link"
                       defaultValue="https://ui.shadcn.com/docs/installation"
                       readOnly
+                      ref={inputRef}
                     />
                   </div>
-                  <Button type="submit" size="sm" className="px-3">
+                  <Button type="submit" size="sm" className="px-3" onClick={handleCopy} >
                     <span className="sr-only">Copy</span>
                     <Copy className="h-4 w-4" />
                   </Button>
                 </div>
                 <DialogFooter className="sm:justify-start">
-                  <WhatsappShareButton
-                    url={"bharatpanigrahi.cloud"}
-                    title={"question share"}
-                    separator=":: "
-                    className=""
-                  >
-                    <WhatsappIcon size={32} round />
-                  </WhatsappShareButton>
-                  <TwitterShareButton
-                    url={"bharatpanigrahi.cloud"}
-                    title={"question share"}
-                    className=""
-                  >
-                    <TwitterIcon size={32} round />
-                  </TwitterShareButton>
-                  <LinkedinShareButton
-                    url={"bharatpanigrahi.cloud"}
-                    title={"question share"}
-                    className=""
-                  >
-                    <LinkedinIcon size={32} round />
-                  </LinkedinShareButton>
                   <DialogClose asChild>
-                    <Button type="button" variant="secondary">
+                    <Button type="button" variant="secondary" className="mt-2 md:mt-0">
                       Close
                     </Button>
                   </DialogClose>
+
+                  <ShareBtn url="https://bharatpanigrahi.cloud" description="description" title="title" />
+
                 </DialogFooter>
               </DialogContent>
             </Dialog>
