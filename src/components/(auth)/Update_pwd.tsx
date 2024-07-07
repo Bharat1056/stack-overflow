@@ -39,6 +39,10 @@ function UpdatePwd() {
     const { toast } = useToast()
     const [loading, setLoading] = React.useState(false)
 
+    React.useEffect(() => {
+        setLoading(false)
+    })
+
     const formData = new FormData()
     formData.append("password", form.getValues("password"))
     formData.append("code", code)

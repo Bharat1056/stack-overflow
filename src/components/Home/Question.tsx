@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
@@ -24,11 +24,17 @@ import ShareBtn from "../Utils/ShareBtn"
 import { Toast } from 'primereact/toast';
 
 
+
 export default function QuestionBox() {
   const [liked, setLiked] = useState(false)
   const [bookmark, setBookmark] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null);
   const toast = useRef<Toast>(null);
+
+  useEffect(() => {
+    setLiked(false)
+    setBookmark(false)
+  }, [])
 
   const showSuccess = () => {
     toast.current?.show({ summary: '', detail: 'Copied to clipboard', life: 500, className: "bg-transparent text-white p-4 rounded" });
@@ -43,7 +49,7 @@ export default function QuestionBox() {
       const inputValue = inputRef.current.value;
       navigator.clipboard.writeText(inputValue).then(() => {
         showSuccess()
-      }).catch(err => {
+      }).catch((err) => {
         showError()
       });
     }

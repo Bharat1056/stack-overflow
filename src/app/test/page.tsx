@@ -2,6 +2,7 @@
 import React from "react";
 import { publishQuestion } from "../actions/questions/actions"
 import QuestionBox from "@/components/Home/Question";
+import QuestionDetails from "@/components/Home/QuestionDetails";
 
 const page = () => {
     // const [loading, setLoading] = React.useState(false)
@@ -29,7 +30,7 @@ const page = () => {
         //     <button className="text-2xl" onClick={handleSubmit}>{ !loading ? "Click me" : "Loading"}</button>
         // </div>
         <>
-            <QuestionBox />
+            <QuestionDetails />
         </>
     )
 }

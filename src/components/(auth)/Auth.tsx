@@ -63,7 +63,10 @@ const Auth = ({ authType }: Props) => {
   const [honeyValue, setHoneyValue] = React.useState("")
   const [loading, setLoading] = React.useState(false);
 
-
+  React.useEffect(() => {
+    setHoneyValue("")
+    setLoading(false)
+  })
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
