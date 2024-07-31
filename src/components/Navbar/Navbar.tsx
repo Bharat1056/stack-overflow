@@ -13,11 +13,9 @@ const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
     const { toast } = useToast()
     const router = useRouter()
     const [loading, setLoading] = useState(false)
-    const [client, setClient] = useState(false)
 
     React.useEffect(() => {
         setLoading(false)
-        setClient(true)
     })
 
     const handlelogout = async () => {
@@ -43,8 +41,6 @@ const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
     }
     return (
         <>
-            {
-                client && (
                     <>
                         <div className="navbar bg-transparent ">
                             <div className="flex-1 cursor-pointer select-none">
@@ -103,8 +99,6 @@ const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
                             </div>
                         </div>
                     </>
-                )
-            }
 
         </>
     )

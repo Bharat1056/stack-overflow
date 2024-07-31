@@ -25,6 +25,7 @@ export async function publishQuestion(formData: FormData) {
     user_id: data.user?.id!,
   };
 
+
   // create data object in the database
   const { data: publishData, error: publishError } = await supabase
     .from("Questions")
