@@ -6,6 +6,7 @@ import { logout } from '@/app/actions/auth/actions'
 import { useToast } from '../ui/use-toast'
 import { ToastAction } from '../ui/toast'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 
 const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
@@ -15,7 +16,7 @@ const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
 
     React.useEffect(() => {
         setLoading(false)
-    })
+    }, [])
 
     const handlelogout = async () => {
         setLoading(true)
@@ -55,9 +56,12 @@ const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
 
                                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                         <div className="w-10 rounded-full">
-                                            <img
+                                            <Image
                                                 alt="User Logo"
-                                                src="https://ui-avatars.com/api/?name=Bharat+Panigrahi" />
+                                                src="https://ui-avatars.com/api/?name=Bharat+Panigrahi"
+                                                width={32}    
+                                                height={32}    
+                                            />
                                         </div>
                                     </div>
 
