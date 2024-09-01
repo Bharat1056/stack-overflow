@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 
 import { useState, useRef, useEffect } from "react"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
@@ -22,10 +21,13 @@ import { Label } from "../ui/label"
 import { Copy } from "lucide-react"
 import ShareBtn from "../Utils/ShareBtn"
 import { Toast } from 'primereact/toast';
+import formatNumber from '@/helper/fomatNumber';
+import {QuestionBoxType} from '@/types/types'
 
 
-
-export default function QuestionBox() {
+export default function QuestionBox(
+  { questionTitle, questionDescription, totalVotes, totalViews, totalComments, authorName, authorEmail }: QuestionBoxType
+) {
   const [liked, setLiked] = useState(false)
   const [bookmark, setBookmark] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null);
@@ -37,12 +39,14 @@ export default function QuestionBox() {
   }, [])
 
   const showSuccess = () => {
+    toast.current?.clear()
     toast.current?.show({ summary: '', detail: 'Copied to clipboard', life: 500, className: "bg-transparent text-white p-4 rounded" });
   };
-  const showError = () => {
-    toast.current?.show({ summary: '', detail: 'Error in Copy', life: 500, className: "bg-transparent text-white p-4 rounded" });
-  };
 
+  const showError = () => {
+    toast.current?.clear()
+    toast.current?.replace({ summary: '', detail: 'Error in Copy', life: 500, className: "bg-transparent text-white p-4 rounded" });
+  };
 
   const handleCopy = () => {
     if (inputRef.current) {
@@ -54,23 +58,22 @@ export default function QuestionBox() {
       });
     }
   };
+
   return (
-    <div className="h-screen flex justify-center items-center">
-      <Card className="w-full max-w-3xl">
+    <div className="h-fit mb-5 flex justify-center items-center">
+      <Card className="w-full max-w-3xl border hover:border-white">
         <CardHeader>
           <div className="flex flex-col gap-1">
             <Link
               href="#"
-              className="group inline-flex items-center justify-start gap-1 rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:underline focus:outline-none"
+              className="group inline-flex items-center justify-start gap-1 rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors focus:outline-none"
               prefetch={false}
             >
-              <CardTitle>How do I create a responsive layout with Tailwind CSS?</CardTitle>
+              <CardTitle className="hover:underline ">{questionTitle}</CardTitle>
             </Link>
             <Separator className="my-2" />
             <CardDescription>
-              Tailwind CSS is a utility-first CSS framework that makes it easy to create responsive layouts for your
-              website. By using a combination of responsive breakpoints and utility classes, you can quickly build layouts
-              that adapt to different screen sizes. Some key tips include using the responsive variants of Tailwind's
+              {questionDescription}
             </CardDescription>
           </div>
         </CardHeader>
@@ -78,11 +81,11 @@ export default function QuestionBox() {
           <div className="flex flex-col items-start gap-1">
             <div className="flex items-center gap-2 text-muted-foreground">
               <EyeIcon className="w-4 h-4" />
-              <span>1.2K views</span>
+              <span>{formatNumber(totalViews)} views</span>
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
               <AnswerIcon className="w-4 h-4" />
-              <span>1.2K answered</span>
+              <span>{formatNumber(totalComments)} answered</span>
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
               <Button
@@ -94,7 +97,7 @@ export default function QuestionBox() {
                 <ThumbsUpIcon className="w-4 h-4" />
                 <span className="sr-only">Upvote</span>
               </Button>
-              <span className={` ${liked ? "text-primary" : "text-muted-foreground"}`}>342 votes</span>
+              <span className={` ${liked ? "text-primary" : "text-muted-foreground"}`}>{formatNumber(totalVotes)} votes</span>
             </div>
           </div>
           <div className="flex justify-end text-muted-foreground text-sm">Asked 2 days ago</div>
@@ -103,11 +106,11 @@ export default function QuestionBox() {
           <div className="flex items-center gap-2 cursor-pointer">
             <Avatar className="w-8 h-8 border">
               <AvatarImage src="/placeholder-user.jpg" />
-              <AvatarFallback>AC</AvatarFallback>
+              <AvatarFallback>{(authorName.slice(0, 1)).toUpperCase()}</AvatarFallback>
             </Avatar>
             <div>
-              <div className="font-medium">@acme</div>
-              <div className="text-xs text-muted-foreground">acme@example.com</div>
+              <div className="font-medium">@{authorName}</div>
+              <div className="text-xs text-muted-foreground">{authorEmail}</div>
             </div>
           </div>
           <div className="mt-4 md:mt-0 flex gap-2">
@@ -191,8 +194,7 @@ function BookmarkIcon(props: any) {
   )
 }
 
-
-function EyeIcon(props: any) {
+function EyeIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -212,8 +214,7 @@ function EyeIcon(props: any) {
   )
 }
 
-
-function ShareIcon(props: any) {
+function ShareIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -233,7 +234,6 @@ function ShareIcon(props: any) {
     </svg>
   )
 }
-
 
 function ThumbsUpIcon(props: any) {
   return (
@@ -255,7 +255,7 @@ function ThumbsUpIcon(props: any) {
   )
 }
 
-function AnswerIcon(props: any) {
+function AnswerIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

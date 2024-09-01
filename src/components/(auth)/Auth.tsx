@@ -201,7 +201,11 @@ const Auth = ({ authType }: Props) => {
 
               <div className="flex justify-between">
                 <Button type="reset" variant="outline" onClick={onReset}>Reset</Button>
-                <Button type="submit">{loading ? (<span className="loading loading-dots loading-sm"></span>) : "Submit"}</Button>
+                <Button type="submit">
+                  {
+                    loading ? (<span className="loading loading-dots loading-sm"></span>) : "Submit"
+                  }
+                </Button>
               </div>
             </form>
           </Form>

@@ -1,4 +1,3 @@
-
 "use client"
 import React, { useState } from 'react'
 import { ModeToggle } from '../Toggle'
@@ -44,7 +43,7 @@ const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
                     <>
                         <div className="navbar bg-transparent ">
                             <div className="flex-1 cursor-pointer select-none">
-                                <a className="m-2 text-xl">Fix Overflow</a>
+                                <a className="m-2 text-xl font-semibold">Fix Overflow</a>
                             </div>
                             <div className="flex-none gap-2">
                                 <div className="form-control">
@@ -58,7 +57,7 @@ const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
                                         <div className="w-10 rounded-full">
                                             <img
                                                 alt="User Logo"
-                                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                                src="https://ui-avatars.com/api/?name=Bharat+Panigrahi" />
                                         </div>
                                     </div>
 

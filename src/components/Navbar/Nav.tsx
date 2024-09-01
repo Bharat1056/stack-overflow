@@ -2,21 +2,8 @@ import React from 'react'
 import { createClient } from "@/utils/supabase/server";
 import Navbar from './Navbar';
 import ErrorPage from '../Error/Error';
+import checkTimeBetween from '@/helper/checkTimeGap'
 
-const checkTimeBetween = (databaseTime: string) => {
-
-    const dbDate = new Date(databaseTime);
-
-    const currentTime = Date.now();
-    const timeDifference = currentTime - dbDate.getTime();
-
-    const differenceInHours = timeDifference / (1000 * 60 * 60);
-
-    const isWithin24Hours = differenceInHours <= 24;
-
-    return isWithin24Hours
-
-}
 
 const Nav = async () => {
     const supabase = createClient()
@@ -31,7 +18,9 @@ const Nav = async () => {
 
     if (userError || !userData) {
         isUser = false;
-        return <ErrorPage status="500" errorMessage="Internal Server Error" errorDetails="There was a problem loading the data into the database." />
+        return (
+            <ErrorPage status={userError?.code} errorMessage={userError.message} errorDetails={userError.details} />
+        )
     }
 
 
