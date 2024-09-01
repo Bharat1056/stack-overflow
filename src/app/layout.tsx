@@ -1,13 +1,16 @@
-
+import { Toaster } from "@/components/ui/toaster"
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import Nav from "@/components/Navbar/Nav";
+import { PrimeReactProvider } from 'primereact/api';
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Stack-overflow",
-  description: "Clone app of stack-overflow",
+  title: "Fix-overflow",
+  description: "Fixed version of stack-overflow",
 };
 
 export default function RootLayout({
@@ -17,7 +20,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <PrimeReactProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Nav />
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </PrimeReactProvider>
+      </body>
     </html>
   );
 }

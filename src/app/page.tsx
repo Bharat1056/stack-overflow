@@ -1,8 +1,17 @@
+import HomePage from "@/components/Home/Home";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = createClient()
+  const { data, error } = await supabase.auth.getUser()
+  if (error || !data?.user) {
+    redirect('/Login')
+  }
+
   return (
     <>
-      <h1>Hello world</h1>
+      <HomePage email={data.user.email || ""} />
     </>
   );
 }
