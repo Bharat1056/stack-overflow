@@ -12,6 +12,8 @@ import { Toast } from "primereact/toast"
 import CommentComponent from "./Comment"
 import { QuestionDetailsType } from '@/types/types'
 import formatNumber from "@/helper/fomatNumber"
+import TagComponent from "../Utils/TagComponent"
+import { tag_array } from '@/app/test/test'
 
 export default function QuestionDetails({ questionTitle, questionDescription, totalVotes, totalViews, authorName }: QuestionDetailsType) {
 
@@ -54,6 +56,7 @@ export default function QuestionDetails({ questionTitle, questionDescription, to
                             </p>
                         </div>
                     </div>
+                    <TagComponent tags={tag_array} />
                     <div className="grid gap-4">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
