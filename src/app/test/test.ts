@@ -50,4 +50,6 @@ const testing_array = [
     authorEmail: "charlie@example.com",
   },
 ];
+
+export const tag_array = [ "Array", "Hashmap", "Stack", "Queue", "Tree", "Linkedlist" ];
 export default testing_array;
