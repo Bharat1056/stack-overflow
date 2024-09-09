@@ -8,6 +8,7 @@ const testing_array = [
     totalVotes: Math.floor(Math.random() * 2000) + 1,
     authorName: "john_doe",
     authorEmail: "john@example.com",
+    tags: ["react", "tailwind"],
   },
   {
     questionTitle: "What is the difference between CSS Grid and Flexbox?",
@@ -18,6 +19,7 @@ const testing_array = [
     totalVotes: Math.floor(Math.random() * 2000) + 1,
     authorName: "jane_doe",
     authorEmail: "jane@example.com",
+    tags: ["supabase", "tailwind", "react"],
   },
   {
     questionTitle: "How do I center a div in CSS?",
@@ -28,6 +30,7 @@ const testing_array = [
     totalVotes: Math.floor(Math.random() * 2000) + 1,
     authorName: "alice",
     authorEmail: "alice@example.com",
+    tags: ["next", "mongoDB", "react"],
   },
   {
     questionTitle: "How to optimize images for the web?",
@@ -38,6 +41,7 @@ const testing_array = [
     totalVotes: Math.floor(Math.random() * 2000) + 1,
     authorName: "bob",
     authorEmail: "bob@example.com",
+    tags: ["supabase", "tailwind", "react"],
   },
   {
     questionTitle: "What is the best way to handle state in React?",
@@ -48,6 +52,7 @@ const testing_array = [
     totalVotes: Math.floor(Math.random() * 2000) + 1,
     authorName: "charlie",
     authorEmail: "charlie@example.com",
+    tags: ["SQL", "MongoDB", "react"],
   },
 ];
 

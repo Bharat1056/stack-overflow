@@ -48,7 +48,7 @@ const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
                             </div>
                             <div className="flex-none gap-2">
                                 <div className="form-control">
-                                    <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto bg-transparent" />
+                                    <input name='search-bar' type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto bg-transparent" />
                                 </div>
                                 <ModeToggle />
 

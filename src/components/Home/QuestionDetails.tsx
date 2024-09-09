@@ -14,13 +14,24 @@ import { QuestionDetailsType } from '@/types/types'
 import formatNumber from "@/helper/fomatNumber"
 import TagComponent from "../Utils/TagComponent"
 import { tag_array } from '@/app/test/test'
+import { useRouter } from "next/navigation"
+import useQuestionNavigationData from "@/store/question-navigation-data"
 
-export default function QuestionDetails({ questionTitle, questionDescription, totalVotes, totalViews, authorName }: QuestionDetailsType) {
-
+export default function QuestionDetails() {
     const [liked, setLiked] = useState(false)
     const [bookmark, setBookmark] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
     const toast = useRef<Toast>(null)
+
+    const {
+        authorName,
+        authorEmail,
+        questionTitle,
+        questionDescription,
+        totalVotes,
+        totalViews,
+        tags
+    } = useQuestionNavigationData();
 
     const showSuccess = () => {
         toast.current?.show({ summary: '', detail: 'Copied to clipboard', life: 500, className: "bg-transparent text-white p-4 rounded" });
@@ -56,7 +67,7 @@ export default function QuestionDetails({ questionTitle, questionDescription, to
                             </p>
                         </div>
                     </div>
-                    <TagComponent tags={tag_array} />
+                    <TagComponent tags={tags} />
                     <div className="grid gap-4">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
