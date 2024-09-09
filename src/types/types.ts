@@ -1,11 +1,12 @@
 export type QuestionBoxType = {
-  questionTitle: String;
-  questionDescription: String;
+  questionTitle: string;
+  questionDescription: string;
   totalVotes: number;
   totalViews: number;
   totalComments: number;
-  authorName: String;
-  authorEmail: String;
+  authorName: string;
+  authorEmail: string;
+  tags: string[]
 };
 
 export type QuestionDetailsType = {

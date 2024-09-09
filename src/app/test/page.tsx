@@ -39,8 +39,8 @@ const page = () => {
                 totalVotes={12000}
                 totalViews={12000}
             /> */}
-            <TagComponent tags={tag_array} />
-            {/* {
+            {/* <TagComponent tags={tag_array} /> */}
+            {
                 testing_array.map((question, index) => (
                     <>
                         <QuestionBox
@@ -48,14 +48,15 @@ const page = () => {
                             questionTitle={question.questionTitle}
                             questionDescription={question.questionDescription}
                             totalViews={question.totalViews}
-                            totalAnswer={question.totalAnswer}
                             totalVotes={question.totalVotes}
                             authorName={question.authorName}
                             authorEmail={question.authorEmail}
+                            totalComments={question.totalAnswer}
+                            tags={question.tags}
                         />
                     </>
                 ))
-            } */}
+            }
             {/* <EditorText /> */}
         </>
     )

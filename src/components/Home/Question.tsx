@@ -22,16 +22,38 @@ import { Copy } from "lucide-react"
 import ShareBtn from "../Utils/ShareBtn"
 import { Toast } from 'primereact/toast';
 import formatNumber from '@/helper/fomatNumber';
-import {QuestionBoxType} from '@/types/types'
+import { QuestionBoxType } from '@/types/types'
+import { useRouter } from "next/navigation";
+import useQuestionNavigationData from "@/store/question-navigation-data";
+
 
 
 export default function QuestionBox(
-  { questionTitle, questionDescription, totalVotes, totalViews, totalComments, authorName, authorEmail }: QuestionBoxType
+  {
+    questionTitle,
+    questionDescription,
+    totalVotes,
+    totalViews,
+    totalComments = 0,
+    authorName,
+    authorEmail,
+    tags
+  }: QuestionBoxType
 ) {
+  const router = useRouter()
   const [liked, setLiked] = useState(false)
   const [bookmark, setBookmark] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null);
   const toast = useRef<Toast>(null);
+  const {
+    setQuestionTitle,
+    setQuestionDescription,
+    setTotalVotes,
+    setTotalViews,
+    setAuthorName,
+    setAuthorEmail,
+    setTags
+  } = useQuestionNavigationData();
 
   useEffect(() => {
     setLiked(false)
@@ -59,18 +81,27 @@ export default function QuestionBox(
     }
   };
 
+  const handleNavigate = () => {
+    setAuthorName(authorName)
+    setAuthorEmail(authorEmail)
+    setQuestionTitle(questionTitle)
+    setQuestionDescription(questionDescription)
+    setTotalVotes(totalVotes)
+    setTotalViews(totalViews)
+    setTags(tags)
+    router.push('/question');
+  };
+
   return (
     <div className="h-fit mb-5 flex justify-center items-center">
       <Card className="w-full max-w-3xl border hover:border-white">
         <CardHeader>
           <div className="flex flex-col gap-1">
-            <Link
-              href="#"
+            <div
               className="group inline-flex items-center justify-start gap-1 rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors focus:outline-none"
-              prefetch={false}
             >
-              <CardTitle className="hover:underline ">{questionTitle}</CardTitle>
-            </Link>
+              <CardTitle className="hover:underline cursor-pointer" onClick={handleNavigate}>{questionTitle}</CardTitle>
+            </div>
             <Separator className="my-2" />
             <CardDescription>
               {questionDescription}
