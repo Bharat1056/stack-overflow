@@ -69,7 +69,7 @@ export default function QuestionDetails() {
                     </div>
                     <TagComponent tags={tags} />
                     <div className="grid gap-4">
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-start justify-around md:justify-between h-20 md:h-fit flex-col md:flex-row">
                             <div className="flex items-center gap-2">
                                 <Avatar>
                                     <AvatarImage src="/placeholder-user.jpg" />
@@ -77,7 +77,7 @@ export default function QuestionDetails() {
                                 </Avatar>
                                 <div className="grid gap-0.5">
                                     <p className="text-sm font-medium">@{authorName}</p>
-                                    <p className="text-sm text-muted-foreground">Posted 2 days ago</p>
+                                    <p className="text-sm text-muted-foreground">{authorEmail}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -91,59 +91,66 @@ export default function QuestionDetails() {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex gap-2">
-                            <Button onClick={() => setBookmark((prev) => !prev)} variant="outline" size="sm">
-                                <BookmarkIcon className="w-4 h-4 mr-2" bookmark={bookmark} />
-                                Bookmark
-                            </Button>
-                            <Button onClick={() => setLiked((prev) => !prev)} variant="outline" size="sm">
-                                <ThumbsUpIcon className="w-4 h-4 mr-2" like={liked} />
-                                Vote
-                            </Button>
-                            <Dialog>
-                                <Toast ref={toast} position="top-center" />
-                                <DialogTrigger asChild>
-                                    <Button variant="outline" size="sm">
-                                        <ShareIcon className="w-4 h-4 mr-2" />
-                                        Share
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent className="sm:max-w-md">
-                                    <DialogHeader>
-                                        <DialogTitle>Share link</DialogTitle>
-                                        <DialogDescription>
-                                            Anyone who has this link will be able to view this.
-                                        </DialogDescription>
-                                    </DialogHeader>
-                                    <div className="flex items-center space-x-2">
-                                        <div className="grid flex-1 gap-2">
-                                            <Label htmlFor="link" className="sr-only">
-                                                Link
-                                            </Label>
-                                            <Input
-                                                id="link"
-                                                defaultValue="https://ui.shadcn.com/docs/installation"
-                                                readOnly
-                                                ref={inputRef}
-                                            />
-                                        </div>
-                                        <Button type="submit" size="sm" className="px-3" onClick={handleCopy} >
-                                            <span className="sr-only">Copy</span>
-                                            <Copy className="h-4 w-4" />
+                        <div className="flex gap-2 justify-between items-start flex-col-reverse md:flex-row">
+                            <div className="flex justify-around">
+                                <Button onClick={() => setBookmark((prev) => !prev)} variant="outline" size="sm">
+                                    <BookmarkIcon className="w-4 h-4 mr-2" bookmark={bookmark} />
+                                    Bookmark
+                                </Button>
+                                <Button onClick={() => setLiked((prev) => !prev)} variant="outline" size="sm">
+                                    <ThumbsUpIcon className="w-4 h-4 mr-2" like={liked} />
+                                    Vote
+                                </Button>
+                                <Dialog>
+                                    <Toast ref={toast} position="top-center" />
+                                    <DialogTrigger asChild>
+                                        <Button variant="outline" size="sm">
+                                            <ShareIcon className="w-4 h-4 mr-2" />
+                                            Share
                                         </Button>
-                                    </div>
-                                    <DialogFooter className="sm:justify-start">
-                                        <DialogClose asChild>
-                                            <Button type="button" variant="secondary" className="mt-2 md:mt-0">
-                                                Close
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-md">
+                                        <DialogHeader>
+                                            <DialogTitle>Share link</DialogTitle>
+                                            <DialogDescription>
+                                                Anyone who has this link will be able to view this.
+                                            </DialogDescription>
+                                        </DialogHeader>
+                                        <div className="flex items-center space-x-2">
+                                            <div className="grid flex-1 gap-2">
+                                                <Label htmlFor="link" className="sr-only">
+                                                    Link
+                                                </Label>
+                                                <Input
+                                                    id="link"
+                                                    defaultValue="https://ui.shadcn.com/docs/installation"
+                                                    readOnly
+                                                    ref={inputRef}
+                                                />
+                                            </div>
+                                            <Button type="submit" size="sm" className="px-3" onClick={handleCopy} >
+                                                <span className="sr-only">Copy</span>
+                                                <Copy className="h-4 w-4" />
                                             </Button>
-                                        </DialogClose>
+                                        </div>
+                                        <DialogFooter className="sm:justify-start">
+                                            <DialogClose asChild>
+                                                <Button type="button" variant="secondary" className="mt-2 md:mt-0">
+                                                    Close
+                                                </Button>
+                                            </DialogClose>
 
-                                        <ShareBtn url="https://bharatpanigrahi.cloud" description="description" title="title" />
+                                            <ShareBtn url="https://bharatpanigrahi.cloud" description="description" title="title" />
 
-                                    </DialogFooter>
-                                </DialogContent>
-                            </Dialog>
+                                        </DialogFooter>
+                                    </DialogContent>
+                                </Dialog>
+                            </div>
+
+                            <div className="flex items-center pl-2 md:pl-0 gap-4 text-sm text-muted-foreground">
+                                Posted 2hour ago
+                            </div>
+
                         </div>
                     </div>
                     <div className="grid gap-4">
