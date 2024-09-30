@@ -40,7 +40,7 @@ const page = () => {
                 totalViews={12000}
             /> */}
             {/* <TagComponent tags={tag_array} /> */}
-            {
+            {/* {
                 testing_array.map((question, index) => (
                     <>
                         <QuestionBox
@@ -56,8 +56,8 @@ const page = () => {
                         />
                     </>
                 ))
-            }
-            {/* <EditorText /> */}
+            } */}
+            <EditorText />
         </>
     )
 }

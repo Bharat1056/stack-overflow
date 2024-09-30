@@ -19,7 +19,7 @@ const Nav = async () => {
     if (userError || !userData) {
         isUser = false;
         return (
-            <ErrorPage status={userError?.code} errorMessage={userError.message} errorDetails={userError.details} />
+            <Navbar loggedIn={isUser} isNew={false} />
         )
     }
 
