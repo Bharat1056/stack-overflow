@@ -47,7 +47,6 @@ export async function signup(formData: FormData) {
     },
   };
 
-
   const { data: signUpData, error: signUpError } = await supabase.auth.signUp(
     dataUser
   );
@@ -67,7 +66,7 @@ export async function signup(formData: FormData) {
   if (userError) {
     const { error: deleteError } = await supabase.auth.admin.deleteUser(
       signUpData.user?.id!
-    )
+    );
     if (deleteError) {
       return { success: false, message: deleteError.message };
     }
@@ -83,6 +82,19 @@ export async function resetPassword(formData: FormData) {
   const dataUser = {
     email: formData.get("email") as string,
   };
+
+  console.log(dataUser.email);
+
+  // first check the user exists or not
+  const { data: userData, error: userError } = await supabase
+    .from("User")
+    .select("*")
+    .eq("email", dataUser.email);
+
+
+  if (userData?.length === 0) {
+    return { success: false, message: "This email does not exist" };
+  }
 
   const { error } = await supabase.auth.resetPasswordForEmail(dataUser.email, {
     redirectTo: "http://localhost:3000/update-pwd",
