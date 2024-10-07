@@ -7,6 +7,7 @@ import EditorText from "@/components/Text-Editor/EditorText";
 import testing_array from "./test";
 import { tag_array } from './test'
 import TagComponent from "@/components/Utils/TagComponent";
+import {Chart} from "@/components/Utils/Chart";
 
 const page = () => {
     // const [loading, setLoading] = React.useState(false)
@@ -29,6 +30,9 @@ const page = () => {
     //     }
     // }
 
+    const chartData = [
+        { visitors: 200, fill: "var(--color-safari)" },
+    ]
 
 
     return (
@@ -57,7 +61,8 @@ const page = () => {
                     </>
                 ))
             } */}
-            <EditorText />
+            {/* <EditorText /> */}
+            <Chart chartData={chartData} />
         </>
     )
 }
