@@ -5,7 +5,7 @@ const QuestionStateSchema = z.object({
   question_description: z.string(),
   tags: z.array(z.string()),
   votes: z.number(),
-  answers: z.number(),
+  answers: z.array(z.string()),
   views: z.number(),
   setQuestionTitle: z.function().args(z.string()).returns(z.void()),
   setQuestionDescription: z.function().args(z.string()).returns(z.void()),
@@ -14,7 +14,7 @@ const QuestionStateSchema = z.object({
   removeTag: z.function().args(z.string()).returns(z.void()),
   incrementVotes: z.function().returns(z.void()),
   decrementVotes: z.function().returns(z.void()),
-  setAnswers: z.function().args(z.number()).returns(z.void()),
+  setAnswers: z.function().args(z.string()).returns(z.void()),
   setViews: z.function().args(z.number()).returns(z.void())
 });
 

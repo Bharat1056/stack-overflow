@@ -1,5 +1,4 @@
 "use server";
-
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/utils/supabase/server";
 import {
@@ -98,6 +97,7 @@ export async function updateQuestion(formData: FormData) {
 }
 // show all questions
 export async function showAllQuestions() {
+  const supabase = createClient();
   const { data: showAllData, error: showAllError } = await supabase
     .from("Questions")
     .select("*");
