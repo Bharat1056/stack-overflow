@@ -38,7 +38,7 @@ const ForgetPwd = () => {
 
     React.useEffect(() => {
         setLoading(false)
-    })
+    }, [])
 
     const formData = new FormData()
     formData.append("email", form.getValues("email"))

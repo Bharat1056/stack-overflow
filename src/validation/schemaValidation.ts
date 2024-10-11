@@ -30,7 +30,7 @@ const signInSchema = z
       .string()
       .min(8, { message: "Password must be at least 8 characters" })
       .regex(passwordRegex, {
-        message: "Password contains one uppercase, lowercase, and number ",
+        message: "Password contains one uppercase, lowercase, and number",
       }),
   })
   .required();

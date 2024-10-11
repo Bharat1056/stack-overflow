@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Nav from "@/components/Navbar/Nav";
 import { PrimeReactProvider } from 'primereact/api';
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
           >
             <Nav />
             {children}
+            <Analytics />
             <Toaster />
           </ThemeProvider>
         </PrimeReactProvider>

@@ -39,3 +39,25 @@ const updateQuestionSchema = z.object({
 });
 export type updateQuestionSchemaType = z.infer<typeof updateQuestionSchema>;
 export  { updateQuestionSchema }
+
+const NavigationQuestionStateSchema = z.object({
+  questionTitle: z.string(),
+  questionDescription: z.string(),
+  tags: z.array(z.string()),
+  totalVotes: z.number(),
+  totalViews: z.number(),
+  authorName: z.string(),
+  authorEmail: z.string(),
+  setQuestionTitle: z.function().args(z.string()).returns(z.void()),
+  setQuestionDescription: z.function().args(z.string()).returns(z.void()),
+  setTotalVotes: z.function().args(z.number()).returns(z.void()),
+  setTotalViews: z.function().args(z.number()).returns(z.void()),
+  setAuthorName: z.function().args(z.string()).returns(z.void()),
+  setAuthorEmail: z.function().args(z.string()).returns(z.void()),
+  setTags: z.function().args(z.array(z.string())).returns(z.void()),
+  addTag: z.function().args(z.string()).returns(z.void()),
+  removeTag: z.function().args(z.string()).returns(z.void()),
+});
+
+export type NavigationQuestionStateSchemaType = z.infer<typeof NavigationQuestionStateSchema>;
+export { NavigationQuestionStateSchema }

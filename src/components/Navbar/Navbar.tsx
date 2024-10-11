@@ -1,4 +1,3 @@
-
 "use client"
 import React, { useState } from 'react'
 import { ModeToggle } from '../Toggle'
@@ -7,6 +6,7 @@ import { logout } from '@/app/actions/auth/actions'
 import { useToast } from '../ui/use-toast'
 import { ToastAction } from '../ui/toast'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 
 const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
@@ -16,7 +16,7 @@ const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
 
     React.useEffect(() => {
         setLoading(false)
-    })
+    }, [])
 
     const handlelogout = async () => {
         setLoading(true)
@@ -44,11 +44,11 @@ const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
                     <>
                         <div className="navbar bg-transparent ">
                             <div className="flex-1 cursor-pointer select-none">
-                                <a className="m-2 text-xl">Fix Overflow</a>
+                                <a className="m-2 text-xl font-semibold">Fix Overflow</a>
                             </div>
                             <div className="flex-none gap-2">
                                 <div className="form-control">
-                                    <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto bg-transparent" />
+                                    <input name='search-bar' type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto bg-transparent" />
                                 </div>
                                 <ModeToggle />
 
@@ -56,9 +56,12 @@ const Navbar = ({ loggedIn, isNew }: { loggedIn: Boolean, isNew: Boolean }) => {
 
                                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                         <div className="w-10 rounded-full">
-                                            <img
+                                            <Image
                                                 alt="User Logo"
-                                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                                src="https://ui-avatars.com/api/?name=Bharat+Panigrahi"
+                                                width={32}    
+                                                height={32}    
+                                            />
                                         </div>
                                     </div>
 

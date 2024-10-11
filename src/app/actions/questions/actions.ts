@@ -98,6 +98,15 @@ export async function updateQuestion(formData: FormData) {
 // show all questions
 export async function showAllQuestions() {
   const supabase = createClient();
+
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data.user) {
+    return {
+      success: false,
+      message: error?.message || "User not authenticated",
+    };
+  }
+
   const { data: showAllData, error: showAllError } = await supabase
     .from("Questions")
     .select("*");
