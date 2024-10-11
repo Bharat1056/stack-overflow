@@ -73,7 +73,6 @@ const Auth = ({ authType }: Props) => {
     defaultValues: defaultValues
   })
 
-
   async function onSubmit() {
     setLoading(true)
     if (honeyValue != "") {
@@ -85,8 +84,6 @@ const Auth = ({ authType }: Props) => {
       setLoading(false)
       return
     }
-
-
 
     const formData = new FormData()
     formData.append("email", form.getValues("email"))
@@ -120,7 +117,6 @@ const Auth = ({ authType }: Props) => {
       router.push(`${authType === "sign-in" ? "/" : "/Login"}`)
     }
   }
-
 
   function onReset() {
     form.reset()
