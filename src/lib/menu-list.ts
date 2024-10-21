@@ -27,13 +27,21 @@ type Group = {
   menus: Menu[];
 };
 
+function replaceIdInRoute(route: string, id: string) {
+  return route.replace(":id", id);
+}
+
 export function getMenuList(pathname: string): Group[] {
+  
+  const pathSegments = pathname.split("/").filter(Boolean);
+  const id = pathSegments[1] || "default-id"; 
+
   return [
     {
       groupLabel: "",
       menus: [
         {
-          href: "/dashboard",
+          href: replaceIdInRoute(`/user-panel/:id/dashboard`, id),
           label: "Dashboard",
           active: pathname.includes("/dashboard"),
           icon: LayoutGrid,
@@ -51,26 +59,32 @@ export function getMenuList(pathname: string): Group[] {
           icon: SquarePen,
           submenus: [
             {
-              href: "/posts",
+              href: replaceIdInRoute("/user-panel/:id/posts", id),
               label: "All Posts"
             },
             {
-              href: "/posts/new",
+              href: replaceIdInRoute("/user-panel/:id/newPosts", id),
               label: "New Post"
             }
           ]
         },
         {
-          href: "/categories",
+          href: replaceIdInRoute("/user-panel/:id/categories", id),
           label: "Categories",
           active: pathname.includes("/categories"),
           icon: Bookmark
         },
         {
-          href: "/tags",
+          href: replaceIdInRoute("/user-panel/:id/tags", id),
           label: "Tags",
           active: pathname.includes("/tags"),
           icon: Tag
+        },
+        {
+          href: "/users",
+          label: "Users",
+          active: pathname.includes("/users"),
+          icon: Users
         }
       ]
     },
@@ -78,13 +92,7 @@ export function getMenuList(pathname: string): Group[] {
       groupLabel: "Settings",
       menus: [
         {
-          href: "/users",
-          label: "Users",
-          active: pathname.includes("/users"),
-          icon: Users
-        },
-        {
-          href: "/account",
+          href: replaceIdInRoute("/user-panel/:id/account", id),
           label: "Account",
           active: pathname.includes("/account"),
           icon: Settings
